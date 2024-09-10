@@ -1,0 +1,58 @@
+/* src/styles.css */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the container takes at least full viewport height */
+}
+
+.header {
+  background-color: #A9B4C2; /* Set a background color for the header */
+  padding: 20px;
+  text-align: center;
+}
+
+.image-gallery {
+  /* flex: 1 1; */
+  /* background-color: #202c39; */
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+  gap: 20px;
+  width: fit-content;
+}
+
+.image-item {
+  width: 100%;
+  max-width: 350px; /* Adjust this value to change image size */
+  height: 230px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.image-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.background {
+  background-color: #161E27;
+}
+
+.image-holder {
+  display: flex;
+  margin: inherit;
+  width: 100%;
+  justify-content: center;
+}

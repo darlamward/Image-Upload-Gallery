@@ -1,0 +1,57 @@
+/* ImageGallery.css */
+.image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .image-item {
+    position: relative;
+    flex: 0 1 auto; /* Allow items to shrink and grow, but have auto basis */
+    max-width: 200px; /* Limit the width of each image item */
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #EEF1EF; /* Ensure placeholder is visible */
+  }
+  
+  .image-item img {
+    width: 100%; /* Adjust to fit within the item */
+    height: auto;
+    display: block;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none; /* No background */
+    color: white; /* White 'X' */
+    border: none; /* No border */
+    cursor: pointer; /* Pointer cursor */
+    font-size: 25px; /* Size of the 'X' */
+    padding: 0;
+    line-height: 1;
+    text-shadow: 
+      -1px -1px 2px #000, 
+       1px -1px 2px #000, 
+      -1px  1px 2px #000, 
+       1px  1px 2px #000; /* Smoother black outline with blur */
+  }
+  
+  /* Add styles for the uploading placeholder */
+  .uploading-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 200px; /* Match the size of other image items */
+    height: 100px; /* Adjust height as needed */
+    border: 2px dashed #556477; /* Dashed border to indicate placeholder */
+    border-radius: 4px;
+    background-color: #EEF1EF; /* Background color for the placeholder */
+    color: #156783; /* Text color for the placeholder */
+    text-align: center;
+    font-size: 16px; /* Font size for the placeholder text */
+  }
+  
+  

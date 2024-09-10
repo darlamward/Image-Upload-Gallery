@@ -1,0 +1,23 @@
+.drop-zone {
+    border: 2px dashed #556477;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer; /* Indicates that it's clickable */
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+    background-color: #EEF1EF;
+    transition: border-color 0.3s ease;
+  }
+  
+  .drop-zone:hover {
+    border-color: #208AAE; /* Change border color on hover */
+  }
+  
+  /* Removed upload-button styles as it's no longer used */
+  
+  .uploading {
+    color: #156783;
+  }
+  
