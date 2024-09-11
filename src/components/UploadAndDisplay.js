@@ -1,10 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage } from '../firebaseConfig';
 import '../UploadAndDisplay.css';
 
 const UploadAndDisplay = ({ onImagesUpload }) => {
   const [uploadingFiles, setUploadingFiles] = useState([]);
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   // Prevent default drag behaviors
   const preventDefaults = useCallback((e) => {
@@ -31,29 +32,60 @@ const UploadAndDisplay = ({ onImagesUpload }) => {
     uploadFiles(files);
   };
 
-  // Upload files to Firebase Storage
+  // Upload files to Firebase Storage with progress tracking
   const uploadFiles = async (files) => {
+    setUploadingFiles(files.map(file => ({ name: file.name, progress: 0 }))); // Set initial uploading state
+    setUploadProgress(0); // Reset the progress for the next upload
+
     const newUploads = [];
+    const totalFiles = files.length;
+    let completedFiles = 0;
 
-    for (const file of files) {
+    const uploadPromises = files.map((file) => {
       const fileRef = ref(storage, `images/${file.name}`);
+      const uploadTask = uploadBytesResumable(fileRef, file);
 
-      // Add to uploading state (to show placeholder)
-      setUploadingFiles((prev) => [...prev, file.name]);
+      return new Promise((resolve, reject) => {
+        uploadTask.on(
+          'state_changed',
+          (snapshot) => {
+            const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setUploadingFiles(prev => 
+              prev.map(fileState => 
+                fileState.name === file.name ? { ...fileState, progress: Math.round(percentage) } : fileState
+              )
+            );
+            setUploadProgress(Math.round(((completedFiles * 100) + percentage) / totalFiles)); // Update overall progress
+          },
+          (error) => {
+            console.error('Error uploading file:', error);
+            reject(error);
+          },
+          async () => {
+            try {
+              const url = await getDownloadURL(uploadTask.snapshot.ref);
+              newUploads.push(url);
+              completedFiles++;
+              if (completedFiles === totalFiles) {
+                setUploadProgress(100); // Ensure progress is set to 100% once all files are done
+                setUploadingFiles([]); // Clear uploading state after all files are uploaded
+                onImagesUpload(newUploads); // Notify parent component of new images
+              }
+              resolve(); // Resolve the promise when upload completes
+            } catch (error) {
+              console.error('Error getting download URL:', error);
+              reject(error);
+            }
+          }
+        );
+      });
+    });
 
-      try {
-        await uploadBytes(fileRef, file);
-        const url = await getDownloadURL(fileRef);
-        newUploads.push(url);
-      } catch (error) {
-        console.error('Error uploading file:', error);
-      } finally {
-        // Remove from uploading state once upload is complete
-        setUploadingFiles((prev) => prev.filter((name) => name !== file.name));
-      }
+    try {
+      await Promise.all(uploadPromises); // Wait for all uploads to complete
+    } catch (error) {
+      console.error('Error uploading files:', error);
     }
-
-    onImagesUpload(newUploads); // Notify parent component of new images
   };
 
   // Trigger the hidden file input when the box is clicked
@@ -68,7 +100,7 @@ const UploadAndDisplay = ({ onImagesUpload }) => {
       onDrop={handleDrop}
       onClick={handleClick} // Handle click on the drop zone
     >
-      <p>Drag and drop or click to upload</p>
+      <p>{uploadingFiles.length > 0 ? `Uploading ${uploadingFiles.length} file(s)...` : 'Drag and drop or click to upload'}</p>
       <input
         type="file"
         multiple
@@ -77,16 +109,14 @@ const UploadAndDisplay = ({ onImagesUpload }) => {
         id="fileInput"
       />
 
-      {/* Show progress message while files are uploading */}
+      {/* Show progress bar and individual file progress */}
       {uploadingFiles.length > 0 && (
-        <p>Uploading {uploadingFiles.length} file(s)...</p>
+        <div className="progress-bar-container">
+          <div className="progress-bar" style={{ width: `${uploadProgress}%` }}></div>
+        </div>
       )}
     </div>
   );
 };
 
 export default UploadAndDisplay;
-
-
-
-

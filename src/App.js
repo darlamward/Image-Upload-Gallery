@@ -28,25 +28,31 @@ const App = () => {
   // Log the image URLs every time the 'images' state changes
   useEffect(() => {
     console.log('Updated images:', images);
-  }, [images]); // This effect runs whenever the 'images' state is updated
+  }, [images]);
 
   const handleImagesUpload = (newImages) => {
-    setImages((prevImages) => [...newImages, ...prevImages]); // Add new images before old ones
+    // Use a Set to remove duplicates
+    const updatedImages = [...new Set([...newImages, ...images])];
+    setImages(updatedImages); // Add new images before old ones, ensuring no duplicates
   };
 
   return (
-    <div className='background'>
-      <div className="container">
-        <div className="header">
-          <h1>Upload and Display Images</h1>
-          <UploadAndDisplay onImagesUpload={handleImagesUpload} />
-        </div>
-        <div className='image-holder'>
-          <ImageGallery images={images} setImages={setImages} />
-        </div>
-      </div>
+<div className='background'>
+  <div className="container">
+    <div className="header">
+      <h1 className="title">UPLOAD DEMO</h1>
+      <div className='upload-container'>
+  <UploadAndDisplay onImagesUpload={handleImagesUpload} />
+</div>
     </div>
+    <div className='image-holder'>
+      <ImageGallery images={images} setImages={setImages} />
+    </div>
+  </div>
+</div>
+
   );
 };
 
 export default App;
+
