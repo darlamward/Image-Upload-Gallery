@@ -21,3 +21,17 @@
     color: #156783;
   }
   
+  .uploading-box {
+    width: 200px; /* Set the width for the placeholder box */
+    height: 200px; /* Set the height for the placeholder box */
+    background-color: white; /* White background */
+    border: 2px dashed #ddd; /* Border to match the style */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    text-align: center;
+    color: #208AAE;
+    font-size: 16px;
+  }
+  
