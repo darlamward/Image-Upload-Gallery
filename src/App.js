@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import UploadAndDisplay from './components/UploadAndDisplay';
 import ImageGallery from './components/ImageGallery';
+import Footer from './components/Footer'; // Import the Footer component
 import { storage } from './firebaseConfig';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import './styles.css';
@@ -31,7 +32,6 @@ const App = () => {
       return updatedImages;
     });
   };
-  
 
   return (
     <div className='background'>
@@ -46,10 +46,12 @@ const App = () => {
           <ImageGallery images={images} setImages={setImages} />
         </div>
       </div>
+      <Footer /> {/* Add the Footer component */}
     </div>
   );
 };
 
 export default App;
+
 
 
