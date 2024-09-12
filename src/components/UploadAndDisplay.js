@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { storage } from '../firebaseConfig';
+import { storage, firestore } from '../firebaseConfig'; // Import Firestore
+import { doc, setDoc, updateDoc, arrayUnion, getDoc } from 'firebase/firestore'; // Import Firestore methods
 import '../UploadAndDisplay.css';
 
 const UploadAndDisplay = ({ onImagesUpload }) => {
@@ -65,6 +66,23 @@ const UploadAndDisplay = ({ onImagesUpload }) => {
                 setUploadProgress(100);
                 setUploadingFiles([]);
                 onImagesUpload(newUploads); // Notify parent component with the new image URLs
+                
+                // Update Firestore with new image URLs
+                const orderRef = doc(firestore, 'images', 'order');
+                
+                // Check if the document exists
+                const orderDoc = await getDoc(orderRef);
+                if (orderDoc.exists()) {
+                  // Update existing document
+                  await updateDoc(orderRef, {
+                    imageUrls: arrayUnion(...newUploads)
+                  });
+                } else {
+                  // Create a new document
+                  await setDoc(orderRef, {
+                    imageUrls: newUploads
+                  });
+                }
               }
               resolve();
             } catch (error) {
@@ -112,3 +130,4 @@ const UploadAndDisplay = ({ onImagesUpload }) => {
 };
 
 export default UploadAndDisplay;
+

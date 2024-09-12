@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import SortableList, { SortableItem } from 'react-easy-sort';
 import { ref, deleteObject } from 'firebase/storage';
+import { updateDoc, doc } from 'firebase/firestore';
+import { firestore } from '../firebaseConfig';
 import { storage } from '../firebaseConfig';
 import arrayMove from 'array-move';
 import { ClipLoader } from 'react-spinners';
@@ -34,8 +36,16 @@ const ImageGallery = ({ images = [], setImages }) => {
     }
   };
 
-  const onSortEnd = (oldIndex, newIndex) => {
-    setImages((array) => arrayMove(array, oldIndex, newIndex));
+  const onSortEnd = async (oldIndex, newIndex) => {
+    const newImages = arrayMove(images, oldIndex, newIndex);
+    setImages(newImages);
+
+    // Update Firestore with the new order
+    try {
+      await updateDoc(doc(firestore, 'images', 'order'), { imageUrls: newImages });
+    } catch (error) {
+      console.error('Error updating Firestore:', error);
+    }
   };
 
   return (
