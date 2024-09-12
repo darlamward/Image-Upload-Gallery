@@ -1,14 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SortableList, { SortableItem } from 'react-easy-sort';
+import { ref, deleteObject } from 'firebase/storage';
+import { storage } from '../firebaseConfig';
 import arrayMove from 'array-move';
-import '../ImageGallery.css'; // Import the CSS file
+import { ClipLoader } from 'react-spinners';
+import '../ImageGallery.css';
 
-const ImageGallery = ({ images, setImages }) => {
-  const [draggingIndex, setDraggingIndex] = useState(null);
+const ImageGallery = ({ images = [], setImages }) => {
+  const [loadingStates, setLoadingStates] = useState({});
 
-  const handleDelete = (url) => {
-    const updatedImages = images.filter(image => image !== url);
-    setImages(updatedImages);
+  useEffect(() => {
+    const newImages = images.filter((url) => !(url in loadingStates));
+    if (newImages.length > 0) {
+      setLoadingStates((prev) => {
+        const newState = { ...prev };
+        newImages.forEach((url) => (newState[url] = true));
+        return newState;
+      });
+    }
+  }, [images]);
+
+  const handleImageLoad = (url) => {
+    setLoadingStates((prev) => ({ ...prev, [url]: false }));
+  };
+
+  const handleDelete = async (imageUrl) => {
+    try {
+      const fileRef = ref(storage, decodeURIComponent(imageUrl.split('/o/')[1].split('?')[0]));
+      await deleteObject(fileRef);
+      setImages((prevImages) => prevImages.filter((url) => url !== imageUrl));
+    } catch (error) {
+      console.error('Error deleting image:', error);
+    }
   };
 
   const onSortEnd = (oldIndex, newIndex) => {
@@ -20,27 +43,34 @@ const ImageGallery = ({ images, setImages }) => {
       onSortEnd={onSortEnd}
       className="image-gallery"
       draggedItemClassName="dragged"
-      axis="xy" // Allow sorting in both horizontal and vertical directions
-      onDragStart={(index) => setDraggingIndex(index)}
-      onDragEnd={() => setDraggingIndex(null)}
+      axis="xy"
     >
-      {images.map((url, index) => (
-        <SortableItem key={url}>
-          <div
-            className={`image-item ${index === draggingIndex ? 'dragging' : ''}`}
-            style={{ transition: 'transform 0.2s ease' }} // Smooth transition
-          >
-            <img
-              src={url}
-              alt={`Uploaded #${index + 1}`}
-              style={{ width: '100%', height: 'auto' }}
-            />
-            <button className="close-button" onClick={() => handleDelete(url)}>
-              &times;
-            </button>
-          </div>
-        </SortableItem>
-      ))}
+      {images.length > 0 ? (
+        images.map((url, index) => (
+          <SortableItem key={url}>
+            <div className="image-item">
+              <div className="image-wrapper">
+                {loadingStates[url] && (
+                  <div className="loading-overlay">
+                    <ClipLoader color="#208AAE" size={50} />
+                  </div>
+                )}
+                <img
+                  src={url}
+                  alt={`Uploaded #${index + 1}`}
+                  onLoad={() => handleImageLoad(url)}
+                  style={{ display: loadingStates[url] ? 'none' : 'block' }}
+                />
+              </div>
+              <button className="close-button" onClick={() => handleDelete(url)}>
+                &times;
+              </button>
+            </div>
+          </SortableItem>
+        ))
+      ) : (
+        <p>No images uploaded yet.</p>
+      )}
     </SortableList>
   );
 };

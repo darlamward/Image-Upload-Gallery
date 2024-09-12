@@ -9,7 +9,7 @@ html, body {
 .container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure the container takes at least full viewport height */
+  min-height: 100vh;
 }
 
 .header {
@@ -28,18 +28,6 @@ html, body {
   flex-wrap: nowrap;
 }
 
-/* .upload-container {
-  margin-left: auto;
-  margin-right: 38.5%;
-}
-
-.title {
-  flex: 1; /* Pushes the upload section to the right */
-  /* text-align: left;
-  margin-right: 20px; 
-} */ 
-
-
 .image-gallery {
   padding: 20px;
   display: flex;
@@ -53,9 +41,9 @@ html, body {
 }
 
 .image-item {
-  width: 350px; /* Adjust this value to change image size */
+  width: 350px; 
   height: 230px;
-  border: 2px solid #ddd;
+  border: 2px solid #000000;
   border-radius: 4px;
   overflow: hidden;
   margin-bottom: 10px;
