@@ -1,64 +1,49 @@
 import React, { useState } from 'react';
-import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
+import SortableList, { SortableItem } from 'react-easy-sort';
+import arrayMove from 'array-move';
 import '../ImageGallery.css'; // Import the CSS file
 
 const ImageGallery = ({ images, setImages }) => {
+  const [draggingIndex, setDraggingIndex] = useState(null);
 
   const handleDelete = (url) => {
     const updatedImages = images.filter(image => image !== url);
     setImages(updatedImages);
   };
 
-  const onDragEnd = (result) => {
-    if (!result.destination) return;
-
-    const { source, destination } = result;
-    
-    // Handle item reordering
-    if (source.droppableId === destination.droppableId) {
-      const updatedImages = Array.from(images);
-      const [movedImage] = updatedImages.splice(source.index, 1);
-      updatedImages.splice(destination.index, 0, movedImage);
-      setImages(updatedImages);
-    }
+  const onSortEnd = (oldIndex, newIndex) => {
+    setImages((array) => arrayMove(array, oldIndex, newIndex));
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="image-gallery" direction="horizontal">
-        {(provided) => (
+    <SortableList
+      onSortEnd={onSortEnd}
+      className="image-gallery"
+      draggedItemClassName="dragged"
+      axis="xy" // Allow sorting in both horizontal and vertical directions
+      onDragStart={(index) => setDraggingIndex(index)}
+      onDragEnd={() => setDraggingIndex(null)}
+    >
+      {images.map((url, index) => (
+        <SortableItem key={url}>
           <div
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-            className="image-gallery"
+            className={`image-item ${index === draggingIndex ? 'dragging' : ''}`}
+            style={{ transition: 'transform 0.2s ease' }} // Smooth transition
           >
-            {images.map((url, index) => (
-              <Draggable key={url} draggableId={url} index={index}>
-                {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    className="image-item"
-                  >
-                    <img
-                      src={url}
-                      alt={`Uploaded #${index + 1}`}
-                      style={{ width: '100%', height: 'auto' }}
-                    />
-                    <button className="close-button" onClick={() => handleDelete(url)}>
-                      &times;
-                    </button>
-                  </div>
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
+            <img
+              src={url}
+              alt={`Uploaded #${index + 1}`}
+              style={{ width: '100%', height: 'auto' }}
+            />
+            <button className="close-button" onClick={() => handleDelete(url)}>
+              &times;
+            </button>
           </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+        </SortableItem>
+      ))}
+    </SortableList>
   );
 };
 
 export default ImageGallery;
+
