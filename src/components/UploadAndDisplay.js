@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { storage, firestore } from '../firebaseConfig'; // Import Firestore
 import { doc, setDoc, updateDoc, arrayUnion, getDoc } from 'firebase/firestore'; // Import Firestore methods
-import '../UploadAndDisplay.css';
+import '../styles/UploadAndDisplay.css';
 
 const UploadAndDisplay = ({ onImagesUpload }) => {
   const [uploadingFiles, setUploadingFiles] = useState([]);

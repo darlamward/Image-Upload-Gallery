@@ -4,7 +4,7 @@ import ImageGallery from './components/ImageGallery';
 import Footer from './components/Footer'; // Import the Footer component
 import { storage } from './firebaseConfig';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
-import './styles.css';
+import './styles/styles.css';
 import { getDoc, doc } from 'firebase/firestore';
 import { firestore } from './firebaseConfig';
 

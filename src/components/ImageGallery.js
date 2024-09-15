@@ -6,7 +6,7 @@ import { firestore } from '../firebaseConfig';
 import { storage } from '../firebaseConfig';
 import arrayMove from 'array-move';
 import { ClipLoader } from 'react-spinners';
-import '../ImageGallery.css';
+import '../styles/ImageGallery.css';
 
 const ImageGallery = ({ images = [], setImages }) => {
   const [loadingStates, setLoadingStates] = useState({});
