@@ -2,9 +2,6 @@
 
 This project is a simple image upload and gallery app built with **React** and **Firebase**. It allows users to upload images by drag-and-drop, displays a progress bar during uploads, and fetches the uploaded images from Firebase. Images can be reordered via drag-and-drop and deleted from the gallery. Image metadata (URLs and order) is stored and updated in **Firestore**.
 
-## [Figma Mockup](https://www.figma.com/design/q8h0MoQ4tel21E818GGPtt/Upload-Demo?node-id=0-1&t=yRNoP2OUyYcT0AzV-1)
-```https://www.figma.com/design/q8h0MoQ4tel21E818GGPtt/Upload-Demo?node-id=0-1&t=yRNoP2OUyYcT0AzV-1```
-
 ## Tech Stack
 
 - React
@@ -13,6 +10,8 @@ This project is a simple image upload and gallery app built with **React** and *
 - react-spinners for loading indicators
 
 ## Getting Started
+
+### [Figma Mockup](https://www.figma.com/design/q8h0MoQ4tel21E818GGPtt/Upload-Demo?node-id=0-1&t=yRNoP2OUyYcT0AzV-1)
 
 ### Prerequisites
 
