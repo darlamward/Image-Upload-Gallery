@@ -139,7 +139,6 @@ Your application will be available at ```http://localhost:3000.```
 │   ├── components
 │   │   ├── DragAndDrop.js
 │   │   ├── UploadAndDisplay.js
-│   │   ├── StrictModeDroppable.js
 │   │   ├── ImageGallery.js
 │   │   └── Footer.js
 │   ├── firebaseConfig.js
