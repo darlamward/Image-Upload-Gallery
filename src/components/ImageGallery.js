@@ -93,7 +93,7 @@ const ImageGallery = ({ images = [], setImages }) => {
           </SortableItem>
         ))
       ) : (
-        <p>No images uploaded yet.</p>
+        <p>No images to display.</p>
       )}
     </SortableList>
   );
