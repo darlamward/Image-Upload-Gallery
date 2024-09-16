@@ -1,7 +1,11 @@
+// Image Upload Gallery Demo
+// This project is a simple image upload and gallery app built with React and Firebase. It allows users to upload images by drag-and-drop, displays a progress bar during uploads, 
+// and fetches the uploaded images from Firebase. Images can be reordered via drag-and-drop and deleted from the gallery. Image metadata (URLs and order) is stored and updated in Firestore.
+// Completed by Darla Ward. September 16, 2024.
 import React, { useState, useEffect } from 'react';
 import UploadAndDisplay from './components/UploadAndDisplay';
 import ImageGallery from './components/ImageGallery';
-import Footer from './components/Footer'; // Import the Footer component
+import Footer from './components/Footer'; 
 import { storage } from './firebaseConfig';
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import './styles/styles.css';

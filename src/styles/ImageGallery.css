@@ -1,4 +1,3 @@
-
 .image-gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -14,7 +13,7 @@
   position: relative;
   width: 100%;
   height: auto;
-  cursor: grab; /* Default cursor for drag */
+  cursor: grab; 
 }
 
 .image-item img {
@@ -48,7 +47,6 @@
   position: relative;
 }
 
-/* Loader spinner styles */
 .loader {
   display: flex;
   justify-content: center;
@@ -58,26 +56,23 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.7); /* Slight overlay effect */
-  z-index: 10; /* Keep it on top of the image */
+  background-color: rgba(255, 255, 255, 0.7); 
+  z-index: 10; 
 }
 
-/* Hide the image until it's fully loaded */
 .image-item img.hidden {
   visibility: hidden;
 }
 
-/* Highlighting style for the item being dragged */
 .image-item.dragging {
-  border: 2px solid #1d8baf; /* Highlight border color */
-  background-color: #f0f8ff; /* Light background color */
+  border: 2px solid #1d8baf; 
+  background-color: #f0f8ff;
   transition: background-color 0.3s ease, border 0.3s ease;
 }
 
-/* Cursor style for reordering */
 .dragged {
   cursor: grabbing;
-  z-index: 1000; /* Ensure it's on top */
+  z-index: 1000; 
 }
 
 .image-wrapper {
@@ -92,10 +87,10 @@
   left: 0;
   width: 350px;
   height: 100%;
-  background: rgb(0, 0, 0, 1); /* Light overlay for better visibility */
+  background: rgb(0, 0, 0, 1); 
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px; /* Adjust as needed */
+  font-size: 20px; 
 }
 

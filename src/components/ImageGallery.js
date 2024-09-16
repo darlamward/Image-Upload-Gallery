@@ -22,6 +22,7 @@ const ImageGallery = ({ images = [], setImages }) => {
     }
   }, [images]);
 
+  // Handle image load event to update loading state
   const handleImageLoad = (url) => {
     setLoadingStates((prev) => ({ ...prev, [url]: false }));
   };
@@ -40,7 +41,7 @@ const ImageGallery = ({ images = [], setImages }) => {
       // Update Firestore by removing the image URL from the `imageUrls` array
       const orderRef = doc(firestore, 'images', 'order');
       await updateDoc(orderRef, {
-        imageUrls: images.filter((url) => url !== imageUrl) // Remove the URL from Firestore
+        imageUrls: images.filter((url) => url !== imageUrl) 
       });
   
       console.log(`Successfully deleted image: ${imageUrl}`);
@@ -49,7 +50,7 @@ const ImageGallery = ({ images = [], setImages }) => {
     }
   };
   
-
+  // Handle reordering of images
   const onSortEnd = async (oldIndex, newIndex) => {
     const newImages = arrayMove(images, oldIndex, newIndex);
     setImages(newImages);

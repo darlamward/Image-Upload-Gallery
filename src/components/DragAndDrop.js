@@ -1,4 +1,3 @@
-// DragAndDrop.js
 import React, { useState } from 'react';
 import { storage } from './firebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
@@ -24,8 +23,10 @@ function DragAndDrop({ onFilesUploaded }) {
     const storageRef = ref(storage, `images/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
+    // Monitor the upload state
     uploadTask.on('state_changed',
       (snapshot) => {
+        // Calculate and set the upload progress
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setProgress(progress);
       },
@@ -35,7 +36,7 @@ function DragAndDrop({ onFilesUploaded }) {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           console.log('File available at:', url);
-          onFilesUploaded(url); // Notify the parent component with the new URL
+          onFilesUploaded(url); 
         });
       }
     );

@@ -1,44 +1,49 @@
 import React, { useState, useCallback } from 'react';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { storage, firestore } from '../firebaseConfig'; // Import Firestore
-import { doc, setDoc, updateDoc, arrayUnion, getDoc } from 'firebase/firestore'; // Import Firestore methods
+import { storage, firestore } from '../firebaseConfig'; 
+import { doc, setDoc, updateDoc, arrayUnion, getDoc } from 'firebase/firestore';
 import '../styles/UploadAndDisplay.css';
 
 const UploadAndDisplay = ({ onImagesUpload }) => {
   const [uploadingFiles, setUploadingFiles] = useState([]);
   const [uploadProgress, setUploadProgress] = useState(0);
 
+  // Prevent default behavior and propagation of events
   const preventDefaults = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
   }, []);
 
+  // Handle drag over event to set drop effect
   const handleDragOver = useCallback((e) => {
     preventDefaults(e);
-    e.dataTransfer.dropEffect = 'copy'; // Show copy cursor
+    e.dataTransfer.dropEffect = 'copy'; 
   }, [preventDefaults]);
 
+  // Handle file drop event
   const handleDrop = useCallback(async (e) => {
     preventDefaults(e);
-    const files = Array.from(e.dataTransfer.files);
+    const files = Array.from(e.dataTransfer.files); 
     uploadFiles(files);
   }, [preventDefaults]);
 
+  // Handle file input change event
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     uploadFiles(files);
   };
 
   const uploadFiles = async (files) => {
-    setUploadingFiles(files.map(file => ({ name: file.name, progress: 0 })));
-    setUploadProgress(0);
+    setUploadingFiles(files.map(file => ({ name: file.name, progress: 0 }))); // Initialize upload progress for each file
+    setUploadProgress(0); // Reset overall upload progress
 
     const newUploads = [];
     const totalFiles = files.length;
     let completedFiles = 0;
 
+    // Create an array of upload promises
     const uploadPromises = files.map((file) => {
-      const fileRef = ref(storage, `images/${file.name}`);
+      const fileRef = ref(storage, `images/${file.name}`); // Create a reference to the file in Firebase Storage
       const uploadTask = uploadBytesResumable(fileRef, file);
 
       return new Promise((resolve, reject) => {
@@ -130,4 +135,3 @@ const UploadAndDisplay = ({ onImagesUpload }) => {
 };
 
 export default UploadAndDisplay;
-
