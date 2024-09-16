@@ -9,6 +9,8 @@ This project is a simple image upload and gallery app built with **React** and *
 - react-easy-sort for drag-and-drop reordering
 - react-spinners for loading indicators
 
+### [Figma Mockup](https://www.figma.com/design/q8h0MoQ4tel21E818GGPtt/Upload-Demo?node-id=0-1&t=yRNoP2OUyYcT0AzV-1)
+
 ## Design Choices
 ### **1. Drag-and-Drop Interface**
 The drag-and-drop zone is visually prominent in the UI, inviting users to easily upload files.
@@ -41,8 +43,6 @@ Initially, the gallery was being reset when multiple images were uploaded using 
 This project was an excellent learning opportunity in building full-stack applications with Firebase, managing real-time data, and implementing complex features like drag-and-drop reordering. As someone who had not used Firebase before, achieving a successful implementation was a significant milestone. Despite some initial hurdles, the final product is both user-friendly and functional, with features that are extendable for future improvements. This experience has broadened my skills and understanding of integrating Firebase with React to build dynamic web applications.
 
 ## Getting Started
-
-### [Figma Mockup](https://www.figma.com/design/q8h0MoQ4tel21E818GGPtt/Upload-Demo?node-id=0-1&t=yRNoP2OUyYcT0AzV-1)
 
 ### Prerequisites
 
