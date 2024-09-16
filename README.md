@@ -9,6 +9,37 @@ This project is a simple image upload and gallery app built with **React** and *
 - react-easy-sort for drag-and-drop reordering
 - react-spinners for loading indicators
 
+## Design Choices
+### **1. Drag-and-Drop Interface**
+The drag-and-drop zone is visually prominent in the UI, inviting users to easily upload files.
+### **2. Loading Indicators**
+The react-spinners library is used to provide visual feedback to users while images are being uploaded or reordered. I chose this library because it offers a simple yet effective way to indicate loading states, which is crucial for ensuring users know the app is responsive during lengthy uploads or updates.
+### **3. Responsive Design**
+The layout was designed to be responsive, ensuring that the drag-and-drop upload zone and image gallery adapt to different screen sizes, offering an optimal experience across desktop and mobile devices.
+### **4. Dark Theme**
+One of the primary design choices was to implement a dark color scheme. Dark colors reduce eye strain, especially in low-light environments, and enhance the user's focus on the images in the gallery. This theme provides a visually calming experience, making it easier to concentrate on the content.
+### **5. Color Harmony**
+All the colors in the app have been carefully selected to work together harmoniously, ensuring a clean, cohesive, and aesthetically pleasing user interface. The color palette helps in creating a smooth user experience without clashing visuals.
+
+## Challenges Faced
+### **1. Managing Image Reordering**
+Implementing drag-and-drop reordering for the image gallery was a key challenge. I initially tried different libraries but settled on react-easy-sort because of its simplicity and flexibility in handling both horizontal and vertical reordering. The challenge here was ensuring that the new order is consistently saved to Firestore and reflected in the UI without performance issues or state inconsistencies.
+
+### **2. Progressive Image Loading**
+One of the other challenges I encountered was implementing a placeholder image that only applies to newly uploaded images, rather than all images in the gallery. This required conditional logic to ensure the placeholders appear only for files currently being processed.
+
+### **3. Handling Multiple File Uploads**
+Initially, the gallery was being reset when multiple images were uploaded using the drag-and-drop functionality. This was a bug that required restructuring how image state was managed. I successfully resolved this by handling file processing asynchronously and ensuring the gallery state was preserved during multiple uploads.
+
+## Extra Features
+- **Image Reordering:** Users can drag and drop images to reorder them, with the updated order saved in Firestore.
+- **Progress Bar:** A progress bar is shown while the image is uploading, improving the user experience by giving real-time feedback.
+- **Loading Indicators:** A loading spinner ensures users are aware when images are being processed or fetched from Firebase.
+- **Image Deletion:** Users can delete images from the gallery, and the changes are reflected both in the Firebase Storage and the Firestore database.
+
+## Conclusion
+This project was an excellent learning opportunity in building full-stack applications with Firebase, managing real-time data, and implementing complex features like drag-and-drop reordering. As someone who had not used Firebase before, achieving a successful implementation was a significant milestone. Despite some initial hurdles, the final product is both user-friendly and functional, with features that are extendable for future improvements. This experience has broadened my skills and understanding of integrating Firebase with React to build dynamic web applications.
+
 ## Getting Started
 
 ### [Figma Mockup](https://www.figma.com/design/q8h0MoQ4tel21E818GGPtt/Upload-Demo?node-id=0-1&t=yRNoP2OUyYcT0AzV-1)
