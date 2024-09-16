@@ -101,14 +101,14 @@ You can deploy this app to any static hosting service, such as Firebase Hosting,
 │   │   ├── UploadAndDisplay.js
 │   │   ├── StrictModeDroppable.js
 │   │   ├── ImageGallery.js
-│   │   ├── Footer.js
+│   │   └── Footer.js
 │   ├── firebaseConfig.js
 │   ├── App.js
 │   ├── index.js
 │   └── styles
 │       ├── styles.css
 │       ├── ImageGallery.css
-│       └── UploadAndDisplay.css
+│       ├── UploadAndDisplay.css
 │       ├── index.css
 │       └── Footer.css
 └── public
