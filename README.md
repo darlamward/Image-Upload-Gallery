@@ -103,6 +103,8 @@ Your application will be available at ```http://localhost:3000.```
 ## File Structure
 ```bash
 ├── src
+│   ├── assets
+│   │   └── logo.svg
 │   ├── components
 │   │   ├── DragAndDrop.js
 │   │   ├── UploadAndDisplay.js
@@ -119,7 +121,7 @@ Your application will be available at ```http://localhost:3000.```
 │       ├── index.css
 │       └── Footer.css
 └── public
-    ├── index.html
+    └── index.html
 ```
 # License
 
