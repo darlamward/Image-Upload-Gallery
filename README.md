@@ -31,7 +31,7 @@ Ensure you have the following installed on your machine:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone [https://github.com/your-username/image-upload-gallery.git](https://github.com/darlamward/Image-Upload-Gallery-Demo.git)
+git clone https://github.com/darlamward/Image-Upload-Gallery-Demo.git
 cd Image-Upload-Gallery-Demo
 ```
 
