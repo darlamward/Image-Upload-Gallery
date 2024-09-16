@@ -49,17 +49,17 @@ npm install
 3. Go to **Project Settings** in Firebase, and under Your apps, register a new web app.
 4. Copy the Firebase configuration keys.
 
-  Next, create a ```.env``` file in the root directory of the project and add your Firebase configuration as follows:
-  ```bash
-  REACT_APP_FIREBASE_API_KEY=YOUR_API_KEY
-  REACT_APP_FIREBASE_AUTH_DOMAIN=YOUR_PROJECT_ID.firebaseapp.com
-  REACT_APP_FIREBASE_PROJECT_ID=YOUR_PROJECT_ID
-  REACT_APP_FIREBASE_STORAGE_BUCKET=YOUR_PROJECT_ID.appspot.com
-  REACT_APP_FIREBASE_MESSAGING_SENDER_ID=YOUR_MESSAGING_SENDER_ID
-  REACT_APP_FIREBASE_APP_ID=YOUR_APP_ID
-  REACT_APP_FIREBASE_MEASUREMENT_ID=YOUR_MEASUREMENT_ID
-  ```
-  **Important:** Never commit your .env file to GitHub. Add the .env file to your .gitignore to keep it secure.
+    Next, create a ```.env``` file in the root directory of the project and add your Firebase configuration as follows:
+    ```bash
+    REACT_APP_FIREBASE_API_KEY=YOUR_API_KEY
+    REACT_APP_FIREBASE_AUTH_DOMAIN=YOUR_PROJECT_ID.firebaseapp.com
+    REACT_APP_FIREBASE_PROJECT_ID=YOUR_PROJECT_ID
+    REACT_APP_FIREBASE_STORAGE_BUCKET=YOUR_PROJECT_ID.appspot.com
+    REACT_APP_FIREBASE_MESSAGING_SENDER_ID=YOUR_MESSAGING_SENDER_ID
+    REACT_APP_FIREBASE_APP_ID=YOUR_APP_ID
+    REACT_APP_FIREBASE_MEASUREMENT_ID=YOUR_MEASUREMENT_ID
+    ```
+    **Important:** Never commit your .env file to GitHub. Add the .env file to your .gitignore to keep it secure.
 
 5. **Set Firebase Storage Rules:** In the Firebase Console, navigate to **Storage > Rules** and replace the existing rules with the following:
    ```bash
@@ -75,21 +75,21 @@ npm install
    ```
    
 6. **Set Firestore Database Rules:** In the Firebase Console, go to **Firestore Database > Rules** and replace the existing rules with the following:
-  ```bash
-  rules_version = '2';
-  
-  service cloud.firestore {
-    match /databases/{database}/documents {
-      match /images/order {
-        allow read, write: if true;
-      }
-  
-      match /images/{document=**} {
-        allow read, write: if true;
+    ```bash
+    rules_version = '2';
+    
+    service cloud.firestore {
+      match /databases/{database}/documents {
+        match /images/order {
+          allow read, write: if true;
+        }
+    
+        match /images/{document=**} {
+          allow read, write: if true;
+        }
       }
     }
-  }
-  ```
+    ```
 7. Firebase configuration in the code will automatically use these environment variables.
 
 ### Step 4: Running the app locally
