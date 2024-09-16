@@ -62,8 +62,8 @@ Ensure you have the following installed on your machine:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/darlamward/Image-Upload-Gallery-Demo.git
-cd Image-Upload-Gallery-Demo
+git clone https://github.com/darlamward/Image-Upload-Gallery.git
+cd Image-Upload-Gallery
 ```
 
 ###  Step 2: Install dependencies
