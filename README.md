@@ -9,9 +9,10 @@ This project is a simple image upload and gallery app built with **React** and *
 - react-easy-sort for drag-and-drop reordering
 - react-spinners for loading indicators
 
+## Design Choices
+
 ### [Figma Mockup](https://www.figma.com/design/q8h0MoQ4tel21E818GGPtt/Upload-Demo?node-id=0-1&t=yRNoP2OUyYcT0AzV-1)
 
-## Design Choices
 ### **1. Drag-and-Drop Interface**
 The drag-and-drop zone is visually prominent in the UI, inviting users to easily upload files.
 ### **2. Loading Indicators**
