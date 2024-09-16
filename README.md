@@ -68,16 +68,6 @@ npm start
 ```
 Your application will be available at ```http://localhost:3000.```
 
-### Step 5: Building for production
-To create a production build of the app, run:
-```bash
-npm run build
-```
-The production-ready files will be generated in the ```build/``` directory.
-
-### Step 6: Deploying the app
-You can deploy this app to any static hosting service, such as Firebase Hosting, Netlify, or Vercel.
-
 ## File Structure
 ```bash
 ├── src
