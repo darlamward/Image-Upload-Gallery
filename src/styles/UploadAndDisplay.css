@@ -11,7 +11,7 @@
   /* max-width: 600px; */
   height: 100px;
   background-color: #EEF1EF;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,9 +25,8 @@
   
   .drop-zone:hover {
     border-color: #266DD3; /* Change border color on hover */
+    color: #208AAE;
   }
-  
-  /* Removed upload-button styles as it's no longer used */
   
   .uploading {
     color: #02C3BD;
@@ -81,3 +80,4 @@
     height: 100%;
     transition: width 0.2s;
   }
+  

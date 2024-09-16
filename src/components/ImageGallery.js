@@ -28,13 +28,27 @@ const ImageGallery = ({ images = [], setImages }) => {
 
   const handleDelete = async (imageUrl) => {
     try {
+      // Decode the image URL to get the file reference
       const fileRef = ref(storage, decodeURIComponent(imageUrl.split('/o/')[1].split('?')[0]));
+      
+      // Delete the file from Firebase Storage
       await deleteObject(fileRef);
+  
+      // Update the local state to remove the image URL
       setImages((prevImages) => prevImages.filter((url) => url !== imageUrl));
+  
+      // Update Firestore by removing the image URL from the `imageUrls` array
+      const orderRef = doc(firestore, 'images', 'order');
+      await updateDoc(orderRef, {
+        imageUrls: images.filter((url) => url !== imageUrl) // Remove the URL from Firestore
+      });
+  
+      console.log(`Successfully deleted image: ${imageUrl}`);
     } catch (error) {
       console.error('Error deleting image:', error);
     }
   };
+  
 
   const onSortEnd = async (oldIndex, newIndex) => {
     const newImages = arrayMove(images, oldIndex, newIndex);
