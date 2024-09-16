@@ -50,7 +50,6 @@ This project was an excellent learning opportunity in building full-stack applic
 Ensure you have the following installed on your machine:
 
 - [Node.js](https://nodejs.org/en/download/) (v16+)
-- [Firebase CLI](https://firebase.google.com/docs/cli) (Optional for setting up Firebase)
 - A Firebase account with a Firebase project set up
 
 ### Setup Firebase
